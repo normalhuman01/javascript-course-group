@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>XMLHttpRequest : POST</title>
+</head>
+<body>
+  <form id="xhr_form">
+    <p>
+      <label for="message">Message:</label>
+      <input type="text" name="message" id="message" value="testing" />
+    </p>
+    <input type="submit" />
+  </form>
+  <script type="text/javascript">
+    var xhr = new XMLHttpRequest(),
+        form = document.getElementById('xhr_form');
+
+    xhr.addEventListener('load', function() {
+      console.log(JSON.parse(xhr.responseText));
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var formData = new FormData(form);
+
+      console.log(formData);
+
+      xhr.open('POST', 'http://0.0.0.0/post.php', true);
+      xhr.send(formData);
+    });
+  </script>
+</body>
+</html>
